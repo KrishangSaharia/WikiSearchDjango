@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $("#id_username").change(function () {
+        var username= $(this).val();
+
+            $.ajax({
+                type:"GET",
+                url:'/ajax/validate_username/',
+                data:{
+                    'username':username
+                },
+                datatype:'json',
+                success:function(data){
+                    if (data.is_taken){
+                        alert("A user with this username already exists .")
+                    }
+                }
+
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <form  method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="signup" value="SIGNUP">
+    </form>
+
+{% endblock %}
+{% if errormessage %}
+
+    {{errormessage}}
+
+{% endif %}

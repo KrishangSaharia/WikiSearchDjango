@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<h2>Your Past Searches-!!</h2>
+{% if past_searches %}
+{% for past_search in past_searches %}
+
+
+{% endfor %}
+{% else %}
+    No Searches Available!<br>
+    <a href="https:en.wikipedia.org/wiki/{{past_search.search_name}}">{{past_search.search_name}}</a><br>
+{%endif%}
+{% endblock %}
